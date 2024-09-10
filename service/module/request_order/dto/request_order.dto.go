@@ -1,6 +1,9 @@
 package dto
 
-import "time"
+import (
+	"assigment2/service/module/request_order/entity"
+	"time"
+)
 
 type CreateItemRequest struct {
 	ItemCode    string `json:"itemCode"`
@@ -14,7 +17,7 @@ type CreateRequestOrderRequest struct {
 	Items        []CreateItemRequest `json:"items"`
 }
 
-type ItemResponse struct {
+type Item struct {
 	ItemCode    string    `json:"itemCode"`
 	Description string    `json:"description"`
 	Quantity    int       `json:"quantity"`
@@ -24,10 +27,10 @@ type ItemResponse struct {
 	OrderId     int       `json:"orderid"`
 }
 
-type RequestOrderResponse struct {
+type RequestOrder struct {
 	Id           int            `json:"id"`
 	CustomerName string         `json:"customer_name"`
-	Items        []ItemResponse `json:"items"`
+	Items        []entity.Items `json:"items"`
 	CreatedAt    time.Time      `json:"created_at"`
 	UpdatedAt    time.Time      `json:"updated_at"`
 }

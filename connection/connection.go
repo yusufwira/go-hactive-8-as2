@@ -1,6 +1,7 @@
 package connection
 
 import (
+	"assigment2/service/module/request_order/entity"
 	"fmt"
 
 	"github.com/rs/zerolog/log"
@@ -15,8 +16,8 @@ type GormDB struct {
 }
 
 func NewConnection() (*GormDB, error) {
-	conn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s",
-		"", "", "", "", "")
+	conn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Bangkok",
+		"postgres", "", "localhost", "5432", "golang")
 	db, err := gorm.Open(postgres.Open(conn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
@@ -26,6 +27,7 @@ func NewConnection() (*GormDB, error) {
 
 	log.Info().Msg("connected successfully to the database with gorm!")
 
+	db.AutoMigrate(&entity.RequestOrder{}, &entity.Items{})
 	return &GormDB{
 		DB: db,
 	}, nil

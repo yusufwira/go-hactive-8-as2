@@ -1,4 +1,4 @@
-package main
+package routers
 
 import (
 	"assigment2/connection"
@@ -32,5 +32,11 @@ func InitRequestOrderRoute(
 }
 
 func (r *requestOrderRoutes) Routes() {
-
+	router := r.Router.Group("/request_order")
+	{
+		router.GET("/getAllData", r.Handler.GetAllData)
+		router.POST("/create", r.Handler.Create)
+		router.PUT("/update/:id", r.Handler.Update)
+		router.DELETE("/delete/:id", r.Handler.Delete)
+	}
 }

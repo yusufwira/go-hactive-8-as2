@@ -1,7 +1,7 @@
 package handler
 
 import (
-	roUsecase "assigment2/service/module/request_order/Usecase"
+	roUsecase "assigment2/service/module/request_order/usecase"
 )
 
 type RequestOrderHandler struct {
