@@ -17,7 +17,7 @@ type GormDB struct {
 
 func NewConnection() (*GormDB, error) {
 	conn := fmt.Sprintf("user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Bangkok",
-		"postgres", "", "localhost", "5432", "golang")
+		"postgres", "LGDoXiqiWkbZAvgedlpAjqdXXlEzZyGr", "autorack.proxy.rlwy.net", "25833", "railway")
 	db, err := gorm.Open(postgres.Open(conn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
