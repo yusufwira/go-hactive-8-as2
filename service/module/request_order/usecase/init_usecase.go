@@ -5,11 +5,13 @@ import (
 	"assigment2/service/module/request_order/dto"
 	roRepo "assigment2/service/module/request_order/repository"
 	"context"
+	"sync"
 )
 
 type RequestOrderUsecase struct {
 	RequestOrderRepository roRepo.IRequestOrderRepository
 	GormDB                 *connection.GormDB
+	cache                  sync.Map
 }
 
 func InitRequestOrderUsecase(requestOrderRepository roRepo.IRequestOrderRepository, gormDB *connection.GormDB) IRequestOrderUsecase {

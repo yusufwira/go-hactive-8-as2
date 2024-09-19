@@ -41,16 +41,23 @@ func (u *RequestOrderUsecase) CreateRequestOrder(ctx context.Context, req dto.Cr
 			}
 		}
 	}
+	u.cache.Delete("requestOrder")
 
 	return idRo, err
 
 }
 
 func (u *RequestOrderUsecase) GetAllData(ctx context.Context) (res []dto.RequestOrder, err error) {
+
+	if cachedRo, found := u.cache.Load("requestOrder"); found {
+		return cachedRo.([]dto.RequestOrder), nil
+	}
 	res, err = u.RequestOrderRepository.GetAllData(ctx)
 	if err != nil {
 		return
 	}
+
+	u.cache.Store("requestOrder", res)
 
 	return res, err
 }
